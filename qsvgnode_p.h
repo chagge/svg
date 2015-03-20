@@ -148,6 +148,18 @@ public:
     void setVisible(bool visible);
     bool isVisible() const;
 
+    void setEnabled(bool enabled);
+    bool isEnabled() const;
+
+    void setAction(bool action);
+    bool hasAction() const;
+
+    void setTooltip(bool tooltip);
+    bool hasTooltip() const;
+
+    void setTooltipText(const QString& tooltiptext);
+    const QString &getTooltipText();
+
     void setDisplayMode(DisplayMode display);
     DisplayMode displayMode() const;
 
@@ -156,10 +168,46 @@ public:
 
     QString xmlClass() const;
     void setXmlClass(const QString &str);
+
+    // DF added this
+    virtual bool hitTest(const QPoint& position) = 0;
+    virtual QRectF hitRect(void) = 0;
+    virtual QRectF rect(void) = 0;
+    void showAction(int show);
+    QTransform getTransformation(void) { return m_trans;}
+
+    void setMoveFactor(const qreal& factor);
+    const qreal& getMoveFactor(void);
+
+    void setMoveFrom(const QPointF& from);
+    const QPointF& getMoveFrom(void);
+
+    void setMoveTo(const QPointF& to);
+    const QPointF& getMoveTo(void);
+
+    void setRotationFactor(const qreal &rotation);
+    void setRotationCenter(const QPointF &center);
+    void doRotate(QPainter *p, const QPointF &objectcenter);
+   void cleanRotate(QPainter *p, const QPointF& objectcenter);
+
+    void setStrokeFillFactor(const qreal &strokefill);
+    void doStrokeFill(QPainter *p, const qreal pathlength);
+
 protected:
     mutable QSvgStyle m_style;
 
     static qreal strokeWidth(QPainter *p);
+    QTransform    m_trans;
+    int           m_showAction;
+    qreal         m_mouseoverscale;
+    qreal         m_mousepressedscale;
+    qreal         m_moveFactor;
+    qreal         m_rotationFactor;
+    QPointF       m_rotationCenter;
+    qreal         m_strokeFillFactor;
+    QPointF       m_moveFrom;
+    QPointF       m_moveTo;
+
 private:
     QSvgNode   *m_parent;
 
@@ -170,6 +218,11 @@ private:
     QStringList m_requiredFonts;
 
     bool        m_visible;
+    bool        m_enabled;
+    // DF added these
+    bool        m_action;
+    bool        m_tooltip;
+    QString     m_tooltiptext;
 
     QString m_id;
     QString m_class;
@@ -190,6 +243,51 @@ inline bool QSvgNode::isVisible() const
     return m_visible;
 }
 
+inline void QSvgNode::setEnabled(bool enabled)
+{
+   m_enabled = enabled;
+}
+
+inline bool QSvgNode::isEnabled(void) const
+{
+   return m_enabled;
+}
+
+inline void QSvgNode::setAction(bool action)
+{
+   m_action = action;
+}
+
+inline void QSvgNode::showAction(int show)
+{
+   m_showAction = show;
+}
+
+inline bool QSvgNode::hasAction() const
+{
+   return m_action;
+}
+
+inline void QSvgNode::setTooltip(bool tooltip)
+{
+   m_tooltip = tooltip;
+}
+
+inline void QSvgNode::setTooltipText(const QString& tooltiptext)
+{
+   m_tooltiptext = tooltiptext;
+}
+
+inline const QString& QSvgNode::getTooltipText(void)
+{
+   return m_tooltiptext;
+}
+
+inline bool QSvgNode::hasTooltip() const
+{
+   return m_tooltip;
+}
+
 inline QString QSvgNode::nodeId() const
 {
     return m_id;
@@ -198,6 +296,51 @@ inline QString QSvgNode::nodeId() const
 inline QString QSvgNode::xmlClass() const
 {
     return m_class;
+}
+
+inline void QSvgNode::setRotationFactor(const qreal& rotation)
+{
+   m_rotationFactor = rotation;
+}
+
+inline void QSvgNode::setRotationCenter(const QPointF& center)
+{
+   m_rotationCenter = center;
+}
+
+inline void QSvgNode::setStrokeFillFactor(const qreal& strokefill)
+{
+   m_strokeFillFactor = strokefill;
+}
+
+inline void QSvgNode::setMoveFactor(const qreal& move)
+{
+   m_moveFactor = move;
+}
+
+inline const qreal& QSvgNode::getMoveFactor(void)
+{
+   return m_moveFactor;
+}
+
+inline void QSvgNode::setMoveFrom(const QPointF& from)
+{
+   m_moveFrom = from;
+}
+
+inline const QPointF& QSvgNode::getMoveFrom(void)
+{
+   return m_moveFrom;
+}
+
+inline void QSvgNode::setMoveTo(const QPointF& to)
+{
+   m_moveTo = to;
+}
+
+inline const QPointF& QSvgNode::getMoveTo(void)
+{
+   return m_moveTo;
 }
 
 QT_END_NAMESPACE

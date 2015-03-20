@@ -55,13 +55,14 @@ QT_BEGIN_HEADER
 
 QT_BEGIN_NAMESPACE
 
-QT_MODULE(Svg)
+// QT_MODULE(Svg)
 
 class QSvgRendererPrivate;
 class QPainter;
 class QByteArray;
+class QSvgTinyDocument;
 
-class Q_SVG_EXPORT QSvgRenderer : public QObject
+class QSvgRenderer : public QObject
 {
     Q_OBJECT
 
@@ -75,6 +76,7 @@ public:
     QSvgRenderer(QXmlStreamReader *contents, QObject *parent=0);
     ~QSvgRenderer();
 
+    QSvgTinyDocument* getXml(void);
     bool isValid() const;
 
     QSize defaultSize() const;

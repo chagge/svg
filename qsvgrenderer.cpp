@@ -170,6 +170,11 @@ QSvgRenderer::~QSvgRenderer()
 
 }
 
+QSvgTinyDocument *QSvgRenderer::getXml()
+{
+   Q_D(const QSvgRenderer);
+   return d->render;
+}    
 /*!
     Returns true if there is a valid current document; otherwise returns false.
 */

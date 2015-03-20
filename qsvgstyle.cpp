@@ -182,11 +182,14 @@ void QSvgViewportFillStyle::revert(QPainter *p, QSvgExtraStates &)
 
 QSvgFontStyle::QSvgFontStyle(QSvgFont *font, QSvgTinyDocument *doc)
     : m_svgFont(font)
+    , m_oldSvgFont(0)
     , m_doc(doc)
     , m_familySet(0)
     , m_sizeSet(0)
     , m_styleSet(0)
     , m_variantSet(0)
+    , m_weight(0)
+    , m_oldWeight(0)
     , m_weightSet(0)
     , m_textAnchorSet(0)
 {
@@ -194,11 +197,14 @@ QSvgFontStyle::QSvgFontStyle(QSvgFont *font, QSvgTinyDocument *doc)
 
 QSvgFontStyle::QSvgFontStyle()
     : m_svgFont(0)
+    , m_oldSvgFont(0)
     , m_doc(0)
     , m_familySet(0)
     , m_sizeSet(0)
     , m_styleSet(0)
     , m_variantSet(0)
+    , m_weight(0)
+    , m_oldWeight(0)
     , m_weightSet(0)
     , m_textAnchorSet(0)
 {
@@ -408,7 +414,9 @@ QSvgSolidColorStyle::QSvgSolidColorStyle(const QColor &color)
 }
 
 QSvgGradientStyle::QSvgGradientStyle(QGradient *grad)
-    : m_gradient(grad), m_gradientStopsSet(false)
+    :m_gradient(grad)
+     ,m_gradientStopsSet(false)
+     ,m_doc(0)
 {
 }
 

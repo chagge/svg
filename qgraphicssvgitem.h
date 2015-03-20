@@ -49,12 +49,12 @@ QT_BEGIN_HEADER
 
 QT_BEGIN_NAMESPACE
 
-QT_MODULE(Svg)
+//QT_MODULE(Svg)
 
 class QSvgRenderer;
 class QGraphicsSvgItemPrivate;
 
-class Q_SVG_EXPORT QGraphicsSvgItem : public QGraphicsObject
+class /*Q_SVG_EXPORT*/ QGraphicsSvgItem : public QGraphicsObject
 {
     Q_OBJECT
     Q_INTERFACES(QGraphicsItem)

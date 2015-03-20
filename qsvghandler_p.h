@@ -53,15 +53,22 @@
 // We mean it.
 //
 
-#include "QtXml/qxmlstream.h"
+#if QT_VERSION >= 0x050000
+   #include <QXmlStreamReader>
+#else
+   #include "QtXml/qxmlstream.h"
+#endif
 
 #ifndef QT_NO_SVG
 
 #include "QtCore/qhash.h"
 #include "QtCore/qstack.h"
 #include "qsvgstyle_p.h"
-#include "private/qcssparser_p.h"
-#include "private/qsvggraphics_p.h"
+#include "../../../src/gui/text/qcssparser_p.h"
+#include "qsvggraphics_p.h"
+
+//#include "private/qcssparser_p.h"
+//#include "private/qsvggraphics_p.h"
 
 QT_BEGIN_NAMESPACE
 
@@ -71,6 +78,7 @@ class QSvgHandler;
 class QColor;
 class QSvgStyleSelector;
 class QXmlStreamReader;
+class QSvgText;
 
 struct QSvgCssAttribute
 {
@@ -136,6 +144,10 @@ public:
 
 private:
     void init();
+    // Disable copy constructor by making it private
+    QSvgHandler(const QSvgHandler&);
+    // Disable copy assignment by making it private
+    QSvgHandler& operator= (const QSvgHandler&);
 
     QSvgTinyDocument *m_doc;
     QStack<QSvgNode*> m_nodes;

@@ -55,11 +55,11 @@ QT_BEGIN_HEADER
 
 QT_BEGIN_NAMESPACE
 
-QT_MODULE(Svg)
+//QT_MODULE(Svg)
 
 class QSvgGeneratorPrivate;
 
-class Q_SVG_EXPORT QSvgGenerator : public QPaintDevice
+class /*Q_SVG_EXPORT*/ QSvgGenerator : public QPaintDevice
 {
     Q_DECLARE_PRIVATE(QSvgGenerator)
 

@@ -89,6 +89,15 @@ public:
     QSvgG(QSvgNode *parent);
     virtual void draw(QPainter *p, QSvgExtraStates &states);
     Type type() const;
+
+    bool hitTest(const QPoint& position);
+    QRectF hitRect(void) {return m_hitRect;}
+    QRectF rect(void) {return m_rect;}
+
+private:
+    QRectF m_hitRect;
+    QRectF m_rect;
+    bool m_hitRectCalculated;
 };
 
 class QSvgDefs : public QSvgStructureNode
@@ -96,6 +105,10 @@ class QSvgDefs : public QSvgStructureNode
 public:
     QSvgDefs(QSvgNode *parent);
     virtual void draw(QPainter *p, QSvgExtraStates &states);
+    bool hitTest(const QPoint&) { return false; }
+    QRectF hitRect(void) {return QRect(0.0, 0.0, 0.0, 0.0);}
+    QRectF rect(void) {return QRect(0.0, 0.0, 0.0, 0.0);}
+
     Type type() const;
 };
 
@@ -105,6 +118,11 @@ public:
     QSvgSwitch(QSvgNode *parent);
     virtual void draw(QPainter *p, QSvgExtraStates &states);
     Type type() const;
+
+    bool hitTest(const QPoint&) { return false; }
+    QRectF hitRect(void) {return QRect(0.0, 0.0, 0.0, 0.0);}
+    QRectF rect(void) {return QRect(0.0, 0.0, 0.0, 0.0);}
+
 private:
     void init();
 private:

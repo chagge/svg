@@ -93,6 +93,7 @@ public:
         viewBox = QRectF();
         outputDevice = 0;
         resolution = 72;
+        stream = 0L;
 
         attributes.document_title = QLatin1String("Qt Svg Document");
         attributes.document_description = QLatin1String("Generated with Qt");

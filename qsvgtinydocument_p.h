@@ -71,12 +71,13 @@ class QPainter;
 class QByteArray;
 class QSvgFont;
 
-class Q_SVG_EXPORT QSvgTinyDocument : public QSvgStructureNode
+class /*Q_SVG_EXPORT*/ QSvgTinyDocument : public QSvgStructureNode
 {
 public:
     static QSvgTinyDocument * load(const QString &file);
     static QSvgTinyDocument * load(const QByteArray &contents);
     static QSvgTinyDocument * load(QXmlStreamReader *contents);
+
 public:
     QSvgTinyDocument();
     ~QSvgTinyDocument();
@@ -121,8 +122,20 @@ public:
     int currentFrame() const;
     void setCurrentFrame(int);
     void setFramesPerSecond(int num);
+
+    // DF added these
+    QSvgNode* elementOnPosition(const QPoint& mouseposition);
+    QSvgNode* elementWithActionOnPosition(const QPoint& mouseposition);
+    QSvgNode *elementWithTooltipOnPosition(const QPoint &mouseposition);
+    bool hitTest(const QPoint&) { return false; }
+    QRectF hitRect(void) {return QRectF(0.0, 0.0, 0.0, 0.0);}
+    QRectF rect(void) {return QRect(0.0, 0.0, 0.0, 0.0);}
+
 private:
     void mapSourceToTarget(QPainter *p, const QRectF &targetRect, const QRectF &sourceRect = QRectF());
+    QSvgNode *findActionNode(QSvgNode *node, const QPoint &mouseposition);
+   QSvgNode *findTooltipNode(QSvgNode *node, const QPoint &mouseposition);
+
 private:
     QSize  m_size;
     bool   m_widthPercent;

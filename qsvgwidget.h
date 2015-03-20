@@ -42,21 +42,21 @@
 #ifndef QSVGWIDGET_H
 #define QSVGWIDGET_H
 
-#include <QtGui/qwidget.h>
+#include <QWidget.h>
 
 #ifndef QT_NO_SVGWIDGET
 
-QT_BEGIN_HEADER
+//QT_BEGIN_HEADER
 
-QT_BEGIN_NAMESPACE
+//QT_BEGIN_NAMESPACE
 
-QT_MODULE(Svg)
+//QT_MODULE(Svg)
 
 class QSvgWidgetPrivate;
 class QPaintEvent;
 class QSvgRenderer;
 
-class Q_SVG_EXPORT QSvgWidget : public QWidget
+class /*Q_SVG_EXPORT*/ QSvgWidget : public QWidget
 {
     Q_OBJECT
 public:
@@ -72,14 +72,14 @@ public Q_SLOTS:
     void load(const QByteArray &contents);
 protected:
     void paintEvent(QPaintEvent *event);
-private:
-    Q_DISABLE_COPY(QSvgWidget)
+//private:
+//    Q_DISABLE_COPY(QSvgWidget)
     Q_DECLARE_PRIVATE(QSvgWidget)
 };
 
-QT_END_NAMESPACE
+//QT_END_NAMESPACE
 
-QT_END_HEADER
+//QT_END_HEADER
 
 #endif // QT_NO_SVGWIDGET
 #endif // QSVGWIDGET_H
